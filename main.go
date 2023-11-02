@@ -14,14 +14,6 @@ type Product struct {
 
 func main() {
 
-	// what could be the things i change? iterators
-
-	// actually change your example and add maps, filter, find
-	// what are some examples that could be used?
-
-	// could you pass a complex type?
-	// what does a product type looks like?
-
 	products := []Product{{
 		name:        "perfume",
 		price:       40,
@@ -69,28 +61,7 @@ func main() {
 		fmt.Println(product)
 	}
 
-
-	Try some chaining
-
-	// fmt.Println("Product Chaining")
-	// mapProductChain := func(p Product) bool {
-	// 		p.price += 10
-	// 		return true
-
-	// }
-	// Find(MakeIterable(products), findProduct).Map(MakeIterable(products), mapProductChain)
-
-
-	// I could do potentially Wrap functions around them to do a multiple map, filter, and others sequentially
-	// for item := range Map(Filter(MakeIterable(list), even), maps) {
-	// fmt.Println(item)
-	// }
-
 }
-
-// prepare the list to be iterable and take a function during the iteration
-
-// create a function that allows the iteration to happen
 
 func MakeIterable[S ~[]I, I any](s S) Iter[I] {
 	return func(yield func(I) bool) {
@@ -111,7 +82,7 @@ func Filter[I any](iter Iter[I], check func(I) bool) Iter[I] {
 	}
 }
 
-// find returns the actual item
+
 func Find[I any](iter Iter[I], check func(I) bool) Iter[I] {
 	return func(yield func(I) bool) {
 		iter(func(item I) bool  {
@@ -123,8 +94,6 @@ func Find[I any](iter Iter[I], check func(I) bool) Iter[I] {
 	}
 }
 
-// map map doesn't return anything but instead maps the object. with what? if the integer is even then add 2 to it. its a sort of map right?
-
 func Map[I any](iter Iter[I], check func(I) bool) Iter[I] {
 	return func(yield func(I) bool) {
 		iter(func(item I) bool {
@@ -135,8 +104,3 @@ func Map[I any](iter Iter[I], check func(I) bool) Iter[I] {
 		})
 	}
 }
-
-// what's the big thing to understand here? is that you can range over a function if the function complies a certain standard!
-// what's the standard here?
-
-
