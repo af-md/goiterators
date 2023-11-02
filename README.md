@@ -1,6 +1,6 @@
 # GO ITERATORS
 
-This repo contains an example implementation of iterators using the newly available feature range over fun
+This repo contains an example implementation of iterators using the newly available feature "range over func"
 
 To track this feature: <https://github.com/golang/go/issues/61405>
 
