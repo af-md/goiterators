@@ -17,7 +17,7 @@ func main() {
 	products := []Product{{
 		name:        "perfume",
 		price:       40,
-		description: "feminine perfume",
+		description: "paco rabanne collection",
 	},
 		{
 			name:        "cigarettes",
@@ -27,7 +27,7 @@ func main() {
 		{
 			name:        "shoes",
 			price:       30,
-			description: "indian kussa",
+			description: "comfortable trainers",
 		},
 	}
 
@@ -49,14 +49,14 @@ func main() {
 	}
 
 	fmt.Println("Product Map iteration")
-	mapProduct := func(p Product) bool {
-		if p.name == "cigarettes" {
-			p.price += 10
-			return true
+	mapProduct := func(p Product) Product {
+		if p.name == "perfume" {
+			p.price = p.price + 10
+			return p
 		}
-		return false
+		return p
 	}
-    
+
 	for product := range Map(MakeIterable(products), mapProduct) {
 		fmt.Println(product)
 	}
@@ -82,11 +82,10 @@ func Filter[I any](iter Iter[I], check func(I) bool) Iter[I] {
 	}
 }
 
-
-func Find[I any](iter Iter[I], check func(I) bool) Iter[I] {
+func Find[I any](iter Iter[I], match func(I) bool) Iter[I], true {
 	return func(yield func(I) bool) {
-		iter(func(item I) bool  {
-			if check(item) {
+		iter(func(item I) bool {
+			if match(item) {
 				yield(item)
 			}
 			return true
@@ -94,13 +93,10 @@ func Find[I any](iter Iter[I], check func(I) bool) Iter[I] {
 	}
 }
 
-func Map[I any](iter Iter[I], check func(I) bool) Iter[I] {
-	return func(yield func(I) bool) {
+func Map[I any, T any](iter Iter[I], mapf func(I) T) Iter[T] {
+	return func(yield func(T) bool) {
 		iter(func(item I) bool {
-			if check(item) {
-				yield(item)
-			}
-			return true
+			return yield(mapf(item))
 		})
 	}
 }
