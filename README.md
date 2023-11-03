@@ -15,3 +15,13 @@ How to run the code with the feature:
 ```
 GOEXPERIMENT=range gotip run main.go
 ```
+
+## Benchmarking
+
+Using the iterators Filter:
+
+139254	    8790 ns/op
+
+
+Using the just a normal for loop
+

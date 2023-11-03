@@ -1,4 +1,4 @@
-package main
+package helper
 
 import (
 	"fmt"
@@ -57,11 +57,8 @@ func main() {
 		return p
 	}
 
-	HELP()
-
 	for product := range Map(MakeIterable(products), mapProduct) {
 		fmt.Println(product)
-		
 	}
 }
 
@@ -101,4 +98,8 @@ func Map[I any, T any](iter Iter[I], mapf func(I) T) Iter[T] {
 			return yield(mapf(item))
 		})
 	}
+}
+
+func HELP() bool  {
+	return true
 }
