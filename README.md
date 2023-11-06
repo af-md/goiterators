@@ -13,7 +13,7 @@ gotip version  # should say "(w/ rangefunc)" or just output a hash
 
 How to run the code with the feature:
 ```
-GOEXPERIMENT=range gotip run main.go
+GOEXPERIMENT=range gotip test main_test.go  -bench .
 ```
 
 Why there was a need for this feature?
